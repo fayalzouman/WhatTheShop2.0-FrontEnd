@@ -35,8 +35,9 @@ class AuthStore {
     }
   };
 
-  logout = () => {
+  logout = navigation => {
     this.setUser();
+    //navigate the user using the navigation object
   };
 
   checkForToken = async () => {

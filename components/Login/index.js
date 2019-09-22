@@ -6,6 +6,7 @@ import { Form, Item, Input, Button, Text } from "native-base";
 
 // Store
 import authStore from "../../stores/authStore";
+import LoginButton from "../Buttons/LoginButton";
 
 class Login extends Component {
   state = {
@@ -31,11 +32,8 @@ class Login extends Component {
             onChangeText={password => this.setState({ password })}
           />
         </Item>
-        <Button
-          full
-          onPress={() => alert("You need to implement Login noob...")}
-        >
-          <Text>Login</Text>
+        <Button>
+          <LoginButton />
         </Button>
       </Form>
     );

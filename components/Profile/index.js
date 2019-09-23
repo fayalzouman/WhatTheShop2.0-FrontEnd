@@ -2,17 +2,13 @@ import React from "react";
 
 // NativeBase Components
 import { Card, CardItem, Text, Button } from "native-base";
+import LogoutButton from "../Buttons/LogoutButton";
 
 const Profile = () => {
   return (
     <Card>
       <CardItem>
-        <Button
-          danger
-          onPress={() => alert("You need to implement Logout n00b...")}
-        >
-          <Text>Logout</Text>
-        </Button>
+        <LogoutButton />
       </CardItem>
     </Card>
   );

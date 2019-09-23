@@ -2,6 +2,7 @@ import { decorate, observable } from "mobx";
 import axios from "axios";
 import { AsyncStorage } from "react-native";
 import jwt_decode from "jwt-decode";
+import CorpseList from "../components/CorpseList";
 
 const instance = axios.create({
   baseURL: "http://127.0.0.1:8000/"
@@ -25,7 +26,7 @@ class AuthStore {
     }
   };
 
-  login = async userData => {
+  login = async (userData, navigation) => {
     try {
       const res = await instance.post("/api/login/", userData);
       const user = res.data;
@@ -35,8 +36,19 @@ class AuthStore {
     }
   };
 
-  logout = () => {
+  signup = async (userData, navigation) => {
+    try {
+      await instance.post("register/", userData);
+      this.login(userData, navigation);
+    } catch (err) {
+      console.log("something went wrong signing up");
+    }
+  };
+
+  logout = navigation => {
     this.setUser();
+    navigation.navigate("CorpseList");
+    //navigate the user using the navigation object
   };
 
   checkForToken = async () => {

@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
-
+import authStore from "../../stores/authStore";
 // NativeBase Components
 import { Form, Item, Input, Button, Text } from "native-base";
-
-// Store
-import RegisterButton from "../Buttons/RegisterButton";
 
 class Register extends Component {
   state = {
@@ -31,8 +28,12 @@ class Register extends Component {
             onChangeText={password => this.setState({ password })}
           />
         </Item>
-        <Button transparent onPress={() => navigation.navigate("ListScreen")}>
-          <Text style={{ color: "white" }}>Register</Text>
+
+        <Button
+          primary
+          onPress={() => authStore.signup(this.state, this.props.navigation)}
+        >
+          <Text style={{ color: "white" }}>Submit!</Text>
         </Button>
       </Form>
     );

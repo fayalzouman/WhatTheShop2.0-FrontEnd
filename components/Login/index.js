@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
+import { withNavigation } from "react-navigation";
 
 // NativeBase Components
-import { Form, Item, Input, Button, Text } from "native-base";
+import { Container, Button, Form, Item, Input, Text } from "native-base";
+//import { Button } from "react-native";
 
 // Store
 import authStore from "../../stores/authStore";
-import LoginButton from "../Buttons/LoginButton";
+import Register from "../Register";
 
 class Login extends Component {
   state = {
@@ -16,27 +18,41 @@ class Login extends Component {
 
   render() {
     return (
-      <Form>
-        <Item>
-          <Input
-            placeholder="Username"
-            autoCapitalize="none"
-            onChangeText={username => this.setState({ username })}
-          />
-        </Item>
-        <Item last>
-          <Input
-            placeholder="Password"
-            autoCapitalize="none"
-            secureTextEntry={true}
-            onChangeText={password => this.setState({ password })}
-          />
-        </Item>
-        <Button transparent onPress={() => authStore.login(navigation)}>
+      <Container>
+        <Form>
+          <Item>
+            <Input
+              placeholder="Username"
+              autoCapitalize="none"
+              onChangeText={username => this.setState({ username })}
+            />
+          </Item>
+          <Item last>
+            <Input
+              placeholder="Password"
+              autoCapitalize="none"
+              secureTextEntry={true}
+              onChangeText={password => this.setState({ password })}
+            />
+          </Item>
+        </Form>
+        <Button
+          block
+          primary
+          onPress={() => authStore.login(this.state, this.props.navigation)}
+        >
           <Text style={{ color: "white" }}>Login</Text>
         </Button>
-      </Form>
+        <Text>Don't have an account? Register below!</Text>
+        <Button
+          block
+          primary
+          onPress={() => this.props.navigation.navigate("Register")}
+        >
+          <Text style={{ color: "white" }}>Register</Text>
+        </Button>
+      </Container>
     );
   }
 }
-export default observer(Login);
+export default withNavigation(observer(Login));

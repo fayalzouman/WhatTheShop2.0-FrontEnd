@@ -8,20 +8,19 @@ import { ListItem, Card, CardItem, Thumbnail, Text, Left } from "native-base";
 import styles from "./styles";
 
 const CorpseItem = ({ corpse, navigation }) => {
-  // const handlePress = () => {
-  //   navigation.navigate("DetailScreen", {
-  //     corpseID: corpse.id,
-  //     corpseName: corpse.name
-  //   });
-  // };
+  const handlePress = () => {
+    navigation.navigate("CorpseDetail", {
+      corpseID: corpse.id,
+      corpseName: corpse.name
+    });
+  };
   return (
     <ImageBackground
       source={{ uri: corpse.background }}
       style={styles.background}
     >
       <View style={styles.overlay} />
-      <ListItem button style={styles.listitem}>
-        {/* <ListItem button onPress={handlePress} style={styles.listitem}> */}
+      <ListItem button onPress={handlePress} style={styles.listitem}>
         <Card style={styles.transparent}>
           <CardItem style={styles.transparent}>
             <Left>

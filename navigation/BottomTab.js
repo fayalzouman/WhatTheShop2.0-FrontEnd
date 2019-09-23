@@ -19,9 +19,9 @@ const BottomTab = createBottomTabNavigator(
       tabBarIcon: ({ tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === "ListTab") {
+        if (routeName === "CorpseTab") {
           iconName = "skull-crossbones";
-          iconType = "fas fa-skull-crossbones";
+          iconType = "FontAwesome5";
         } else if (routeName === "ProfileTab") {
           iconName = "person";
           iconType = "MaterialIcons";

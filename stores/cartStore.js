@@ -32,10 +32,4 @@ decorate(CorpseStore, {
   quantity: computed
 });
 let corpseStore = new CorpseStore();
-export default corpsetore;
-
-// addItemToCart({
-//   drink: "",
-//   option: "",
-//   quantity: 5
-// });
+export default corpseStore;

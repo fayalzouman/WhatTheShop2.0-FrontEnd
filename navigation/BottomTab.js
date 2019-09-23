@@ -3,23 +3,25 @@ import { Icon } from "native-base";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 
 // Navigators
-import LolStack from "./LolStack";
+
 import ProfileStack from "./ProfileStack";
 import Login from "../components/Login";
+import CorpeStack from "../navigation//CorpseStack";
 
 const BottomTab = createBottomTabNavigator(
   {
     ProfileTab: ProfileStack,
-    LolTab: LolStack
+
+    CorpseTab: CorpeStack
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === "LolTab") {
-          iconName = "smiley";
-          iconType = "Octicons";
+        if (routeName === "ListTab") {
+          iconName = "skull-crossbones";
+          iconType = "fas fa-skull-crossbones";
         } else if (routeName === "ProfileTab") {
           iconName = "person";
           iconType = "MaterialIcons";

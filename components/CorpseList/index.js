@@ -5,11 +5,11 @@ import { observer } from "mobx-react";
 import { List, Content } from "native-base";
 
 // Store
-import corpsetStore from "../../store/corpseStore";
+import corpseStore from "../../stores/corpseStore";
 
 // Component
 import CorpseItem from "./CorpseItem";
-import CartButton from "../CartButton";
+import CartButton from "../Buttons/CartButton";
 
 const CorpseList = ({ navigation }) => {
   const { corpses } = corpseStore;

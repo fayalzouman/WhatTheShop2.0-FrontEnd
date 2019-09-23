@@ -1,5 +1,5 @@
 import { createAppContainer } from "react-navigation";
-import BottomTab from "./BottomTab";
+import BottomTab from "../navigation/BottomTab";
 
 const AppContainer = createAppContainer(BottomTab);
 

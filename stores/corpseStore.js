@@ -8,7 +8,7 @@ class CorpseStore {
 
   fetchAllcorpses = async () => {
     try {
-      let res = await axios.get("http://coffee.q8fawazo.me/api/?format=json");
+      let res = await axios.get("http://192.168.100.53:8000/api/items/");
       let corpses = res.data;
       this.corpses = corpses;
       this.loading = false;

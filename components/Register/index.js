@@ -5,10 +5,9 @@ import { observer } from "mobx-react";
 import { Form, Item, Input, Button, Text } from "native-base";
 
 // Store
-import authStore from "../../stores/authStore";
-import LoginButton from "../Buttons/LoginButton";
+import RegisterButton from "../Buttons/RegisterButton";
 
-class Login extends Component {
+class Register extends Component {
   state = {
     username: "",
     password: ""
@@ -32,11 +31,11 @@ class Login extends Component {
             onChangeText={password => this.setState({ password })}
           />
         </Item>
-        <Button transparent onPress={() => authStore.login(navigation)}>
-          <Text style={{ color: "white" }}>Login</Text>
+        <Button transparent onPress={() => navigation.navigate("ListScreen")}>
+          <Text style={{ color: "white" }}>Register</Text>
         </Button>
       </Form>
     );
   }
 }
-export default observer(Login);
+export default observer(Register);

@@ -4,6 +4,7 @@ import { Button, Icon, Text } from "native-base";
 import { observer } from "mobx-react";
 // import cartStore from "../../store/cartStore";
 import authStore from "../../stores/authStore";
+//after onpress, its either authStore.logout(navigation) or navigation.navigate("ListScreen")
 
 const LogoutButton = ({ navigation }) => {
   return (

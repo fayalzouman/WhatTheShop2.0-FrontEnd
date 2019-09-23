@@ -4,23 +4,13 @@ import React from "react";
 import { Card, CardItem, Text, Button } from "native-base";
 import LogoutButton from "../Buttons/LogoutButton";
 import LoginButton from "../Buttons/LoginButton";
+import Login from "../Login";
 
 const Profile = () => {
   return (
     <Card>
       <CardItem>
-        {/* <Button
-          danger
-          onPress={() => alert("You need to implement Logout n00b...")}
-        >
-          <Text>Logout</Text>
-        </Button>  */}
-        <Button>
-          <LogoutButton />
-        </Button>
-        <Button>
-          <LoginButton />
-        </Button>
+        <LogoutButton />
       </CardItem>
     </Card>
   );

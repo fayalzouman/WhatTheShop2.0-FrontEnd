@@ -14,6 +14,7 @@ const CorpseCart = () => {
   const { items } = cartStore;
   let cartItems;
   if (items) {
+    console.log("CORPSECART", items);
     cartItems = items.map(item => <CartItem item={item} key={item.id} />);
   }
 

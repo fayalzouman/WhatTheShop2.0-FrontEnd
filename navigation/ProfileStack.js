@@ -4,14 +4,14 @@ import { createStackNavigator } from "react-navigation-stack";
 import ProfileScreen from "../components/Profile";
 import LoginScreen from "../components/Login";
 import RegisterScreen from "../components/Register";
-// import CorpeStackScreen from "../navigation//CorpseStack";
+import CorpseListScreen from "../components/CorpseList";
 
 const ProfileStack = createStackNavigator(
   {
     Profile: ProfileScreen,
     Login: LoginScreen,
-    Register: RegisterScreen
-    // CorpeStack: CorpeStackScreen
+    Register: RegisterScreen,
+    CorpseList: CorpseListScreen
   },
   {
     initialRouteName: "Login",

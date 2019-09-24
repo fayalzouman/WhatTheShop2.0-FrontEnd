@@ -8,7 +8,7 @@ import authStore from "../../stores/authStore";
 
 const LogoutButton = ({ navigation }) => {
   return (
-    <Button transparent onPress={() => authStore.logout(navigation)}>
+    <Button primary onPress={() => authStore.logout(navigation)}>
       <Text style={{ color: "white" }}>Logout</Text>
     </Button>
   );

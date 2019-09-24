@@ -2,8 +2,8 @@ import { decorate, observable } from "mobx";
 import axios from "axios";
 
 class CorpseStore {
-  corpses = null;
-  cropse = null;
+  corpses = [];
+  corpse = [];
   loading = true;
 
   fetchAllcorpses = async () => {
@@ -21,8 +21,8 @@ class CorpseStore {
 }
 
 decorate(CorpseStore, {
-  coprses: observable,
-  coprse: observable,
+  corpses: observable,
+  corpse: observable,
   loading: observable
 });
 

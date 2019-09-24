@@ -1,12 +1,3 @@
-// import React from "react";
-// import AppContainer from "./Navigation/AppContainer";
-
-// export default class App extends React.Component {
-//   render() {
-//     return <AppContainer />;
-//   }
-// }
-
 import React, { Component } from "react";
 import { Spinner } from "native-base";
 import AppContainer from "./navigation";

@@ -3,9 +3,10 @@ import axios from "axios";
 import { AsyncStorage } from "react-native";
 import jwt_decode from "jwt-decode";
 import CorpseList from "../components/CorpseList";
+import Profile from "../components/Profile";
 
 const instance = axios.create({
-  baseURL: "http://127.0.0.1:8000/"
+  baseURL: "http://192.168.100.226:8000"
 });
 
 class AuthStore {
@@ -31,24 +32,24 @@ class AuthStore {
       const res = await instance.post("/api/login/", userData);
       const user = res.data;
       this.setUser(user.access);
+      navigation.replace("Profile");
     } catch (err) {
-      console.log("something went wrong logging in");
+      console.error(err);
     }
   };
 
   signup = async (userData, navigation) => {
     try {
-      await instance.post("register/", userData);
+      await instance.post("/api/register/", userData);
       this.login(userData, navigation);
     } catch (err) {
-      console.log("something went wrong signing up");
+      alert(err);
     }
   };
 
-  logout = navigation => {
-    this.setUser();
-    navigation.navigate("CorpseList");
-    //navigate the user using the navigation object
+  logout = async navigation => {
+    await this.setUser();
+    navigation.replace("Login");
   };
 
   checkForToken = async () => {

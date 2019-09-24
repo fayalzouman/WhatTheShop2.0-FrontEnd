@@ -9,7 +9,7 @@
 
 import React, { Component } from "react";
 import { Spinner } from "native-base";
-import AppContainer from "./navigation/AppContainer";
+import AppContainer from "./navigation";
 
 export default class App extends Component {
   state = {

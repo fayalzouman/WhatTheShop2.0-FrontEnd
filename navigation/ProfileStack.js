@@ -15,7 +15,7 @@ const ProfileStack = createStackNavigator(
     CorpseList: CorpseListScreen
   },
   {
-    initialRouteName: "CorpseList",
+    initialRouteName: "Profile",
     defaultNavigationOptions: {
       title: "Humans R Us"
     }

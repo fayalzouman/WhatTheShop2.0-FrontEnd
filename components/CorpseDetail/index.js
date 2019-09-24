@@ -53,7 +53,12 @@ class CorpseDetail extends Component {
           <Button
             full
             danger
-            onPress={() => cartStore.addItemToCart(this.state)}
+            onPress={() =>
+              cartStore.addItemToCart({
+                ...corpse,
+                quantity: this.state.quantity
+              })
+            }
           >
             <Text>Add</Text>
           </Button>

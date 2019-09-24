@@ -3,7 +3,7 @@ import axios from "axios";
 
 class CorpseStore {
   corpses = [];
-  cropse = [];
+  corpse = [];
   loading = true;
 
   fetchAllcorpses = async () => {
@@ -21,8 +21,8 @@ class CorpseStore {
 }
 
 decorate(CorpseStore, {
-  coprses: observable,
-  coprse: observable,
+  corpses: observable,
+  corpse: observable,
   loading: observable
 });
 

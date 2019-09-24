@@ -1,12 +1,12 @@
 import { decorate, observable, computed } from "mobx";
 // import console = require("console");
 
-class CorpseStore {
+class CartStore {
   items = [];
 
   addItemToCart = newItem => {
     const foundItem = this.items.find(
-      item => newItem.body === item.body && newItem.option === item.option
+      item => newItem.corpse === item.corpse && newItem.option === item.option
     );
     if (foundItem) {
       foundItem.quantity += newItem.quantity;
@@ -14,12 +14,15 @@ class CorpseStore {
   };
   checkoutCart = () => {
     this.items = [];
-    alert("Have a great day!");
+    alert("Enjoy your corpse!");
   };
 
-  removeItemFromCart = item => {
-    this.items = this.items.filter(itemB => itemB !== item);
+  removeItemFromCart = itemToDelete => {
+    this.items = this.items.filter(item => item !== itemToDelete);
   };
+  // checkoutCart = () => {
+  //   this.items = [];
+  //   alert("Have a great day!");
 
   get quantity() {
     let total = 0;
@@ -31,5 +34,5 @@ decorate(CorpseStore, {
   items: observable,
   quantity: computed
 });
-let corpseStore = new CorpseStore();
-export default corpseStore;
+
+export default new CartStore();

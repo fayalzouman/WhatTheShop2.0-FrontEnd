@@ -4,6 +4,7 @@ import { createStackNavigator } from "react-navigation-stack";
 import ProfileScreen from "../components/Profile";
 import LoginScreen from "../components/Login";
 import RegisterScreen from "../components/Register";
+
 import CorpseListScreen from "../components/CorpseList";
 
 const ProfileStack = createStackNavigator(
@@ -14,7 +15,7 @@ const ProfileStack = createStackNavigator(
     CorpseList: CorpseListScreen
   },
   {
-    initialRouteName: "Login",
+    initialRouteName: "CorpseList",
     defaultNavigationOptions: {
       title: "Humans R Us"
     }

@@ -62,6 +62,18 @@ class CorpseDetail extends Component {
           >
             <Text>Add</Text>
           </Button>
+          <Button
+            full
+            danger
+            onPress={() =>
+              cartStore.removeItemFromCart({
+                ...corpse,
+                quantity: this.state.quantity
+              })
+            }
+          >
+            <Text>Remove</Text>
+          </Button>
         </List>
         <Card style={styles.transparent}>
           <CardItem style={styles.transparent}>

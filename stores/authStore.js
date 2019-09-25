@@ -5,10 +5,14 @@ import jwt_decode from "jwt-decode";
 import CorpseList from "../components/CorpseList";
 import Profile from "../components/Profile";
 
+
 const instance = axios.create({
   //"http://192.168.100.226:8000"
   baseURL: "http://127.0.0.1:8000/"
 });
+
+import { instance } from "./instance";
+
 
 class AuthStore {
   user = null;
@@ -18,12 +22,12 @@ class AuthStore {
       // Save token to localStorage
       await AsyncStorage.setItem("myToken", token);
       // Set token to Auth header
-      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+      instance.defaults.headers.common.Authorization = `Bearer ${token}`;
       // Set current user
       this.user = jwt_decode(token);
     } else {
       await AsyncStorage.removeItem("myToken");
-      delete axios.defaults.headers.common.Authorization;
+      delete instance.defaults.headers.common.Authorization;
       this.user = null;
     }
   };
@@ -68,7 +72,7 @@ class AuthStore {
         // Set auth token header
         await this.setUser(token);
       } else {
-        this.logout();
+        this.setUser();
       }
     }
   };

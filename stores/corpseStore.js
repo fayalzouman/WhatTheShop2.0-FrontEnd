@@ -1,5 +1,6 @@
 import { decorate, observable } from "mobx";
 import axios from "axios";
+import { instance } from "./instance";
 
 class CorpseStore {
   corpses = [];
@@ -8,9 +9,7 @@ class CorpseStore {
 
   fetchAllcorpses = async () => {
     try {
-      let res = await axios.get(
-        "http://192.168.100.53:8000/api/product/detail/"
-      );
+      let res = await instance.get("/api/product/detail/");
       let corpses = res.data;
       this.corpses = corpses;
       this.loading = false;

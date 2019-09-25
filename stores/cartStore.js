@@ -1,51 +1,64 @@
 import { decorate, observable, computed } from "mobx";
-// import console = require("console");
+import axios from "axios";
+import { instance } from "./instance";
+import { AsyncStorage } from "react-native";
 
 class CartStore {
   items = [];
 
+
   fetchCartItems = async () => {
-    try {
-<<<<<<< HEAD
+
       const res = await instance.get(
         //"http://192.168.100.53:8000/api/product/detail/"
         "http://127.0.0.1:8000/api/cart/"
       );
       this.items = res.data;
-=======
+
       let res = await axios.get(
        //"http://192.168.100.53:8000/api/product/detail/"
        "http://127.0.0.1:8000/api/cart/"
       );
       let corpse = res.data;
       this.corpse = corpse;
->>>>>>> 77a062d9fdb9b922fcf1894fca854d56bd0a4d58
       this.loading = false;
     } catch (err) {
       console.error(err);
     }
   };
-<<<<<<< HEAD
 
   addItemToCart = newItem => {
     const foundItem = this.items.find(item => newItem.id === item.id);
-=======
+
 }
   
   addItemToCart = newItem => {
     const foundItem = this.items.find(
       item => newItem.body === item.name && newItem.option === item.option
     );
->>>>>>> 77a062d9fdb9b922fcf1894fca854d56bd0a4d58
+
+  addItemToCart = async newItem => {
+    const foundItem = this.items.find(item => newItem.id === item.id);
+    console.log("FOUND ITEM", foundItem);
     if (foundItem) {
       foundItem.quantity += newItem.quantity;
       //try catch axios.put
     } else {
+      console.log("NEW ITEM", newItem);
       this.items.push(newItem);
-      //try catch post
+      try {
+        const cartItem = {
+          product: newItem.id,
+          quantity: newItem.quantity
+        };
+        const res = await instance.post("/api/product/add/", cartItem);
+        this.statusMessage = "Success";
+        console.log("RESPONSE", this.statusMessage);
+      } catch (err) {
+        this.statusMessage = err.response;
+        console.log("ERORO", err);
+      }
     }
-
-    console.log("CARTSTORE", this.items);
   };
 
   checkoutCart = () => {

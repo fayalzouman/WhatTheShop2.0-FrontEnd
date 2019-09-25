@@ -5,14 +5,12 @@ import jwt_decode from "jwt-decode";
 import CorpseList from "../components/CorpseList";
 import Profile from "../components/Profile";
 
-
-const instance = axios.create({
-  //"http://192.168.100.226:8000"
-  baseURL: "http://127.0.0.1:8000/"
-});
+// const instance = axios.create({
+//   //"http://192.168.100.226:8000"
+//   baseURL: "http://127.0.0.1:8000/"
+// });
 
 import { instance } from "./instance";
-
 
 class AuthStore {
   user = null;

@@ -49,7 +49,11 @@ class CorpseCart extends Component {
       //if (this.state.loading) {
       <List>
         {this.state.cartItems}
-        <Button full danger onPress={cartStore.checkoutCart}>
+        <Button
+          full
+          danger
+          onPress={() => cartStore.checkoutCart(this.props.navigation)}
+        >
           <Text>Checkout</Text>
         </Button>
       </List>

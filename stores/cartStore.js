@@ -14,6 +14,9 @@ class CartStore {
     this.items = res.data;
 
     // let x = await axios.get(
+
+    // let res = await axios.get(
+
     //  //"http://192.168.100.53:8000/api/product/detail/"
     //  "http://127.0.0.1:8000/api/cart/"
     // );
@@ -29,11 +32,18 @@ class CartStore {
   //   const foundItem = this.items.find(item => newItem.id === item.id);
   // };
 
+
   // addItemToCart = newItem => {
   //   const foundItem = this.items.find(
   //     item => newItem.body === item.name && newItem.option === item.option
   //   );
   // };
+
+  addItemToCart = newItem => {
+    const foundItem = this.items.find(
+      item => newItem.body === item.name && newItem.option === item.option
+    );
+  };
 
   addItemToCart = async newItem => {
     const foundItem = this.items.find(item => newItem.id === item.id);
@@ -54,15 +64,30 @@ class CartStore {
         console.log("RESPONSE", this.statusMessage);
       } catch (err) {
         this.statusMessage = err.response;
-        console.log("ERORO", err);
+        console.log("ERROR", err);
       }
     }
   };
 
-  checkoutCart = () => {
-    //try catch axios checkout request maybe get
+  // checkoutCart = () => {
+  //   //try catch axios checkout request maybe get
+  //   this.items = [];
+  //   try {
+  //     alert("Enjoy your corpse!");
+  //   } catch (err) {
+  //     this.statusMessage = err.response;
+  //     console.log("ERROR", err);
+  //   }
+  // };
+
+  checkoutCart = navigation => {
     this.items = [];
-    alert("Enjoy your corpse!");
+    navigation.replace("CorpseList");
+    try {
+      const res = axios.get("http://127.0.0.1:8000/api/cart/");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   removeItemFromCart = itemToDelete => {

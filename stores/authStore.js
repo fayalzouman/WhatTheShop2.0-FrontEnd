@@ -6,7 +6,8 @@ import CorpseList from "../components/CorpseList";
 import Profile from "../components/Profile";
 
 const instance = axios.create({
-  baseURL: "http://192.168.100.226:8000"
+  //"http://192.168.100.226:8000"
+  baseURL: "http://127.0.0.1:8000/"
 });
 
 class AuthStore {
@@ -31,7 +32,7 @@ class AuthStore {
     try {
       const res = await instance.post("/api/login/", userData);
       const user = res.data;
-      this.setUser(user.access);
+      await this.setUser(user.access);
       navigation.replace("Profile");
     } catch (err) {
       console.error(err);
@@ -42,8 +43,10 @@ class AuthStore {
     try {
       await instance.post("/api/register/", userData);
       this.login(userData, navigation);
+      //navigation.replace("Profile");
     } catch (err) {
-      alert(err);
+      console.error(err);
+      //alert(err);
     }
   };
 
@@ -63,7 +66,7 @@ class AuthStore {
       // Check token expiration
       if (user.exp >= currentTime) {
         // Set auth token header
-        this.setUser(token);
+        await this.setUser(token);
       } else {
         this.logout();
       }

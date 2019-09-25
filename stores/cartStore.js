@@ -6,19 +6,17 @@ class CartStore {
 
   fetchCartItems = async () => {
     try {
-      let res = await axios.get(
-       //"http://192.168.100.53:8000/api/product/detail/"
-       "http://127.0.0.1:8000/api/cart/"
+      const res = await instance.get(
+        //"http://192.168.100.53:8000/api/product/detail/"
+        "http://127.0.0.1:8000/api/cart/"
       );
-      let corpse = res.data;
-      this.corpse = corpse;
+      this.items = res.data;
       this.loading = false;
     } catch (err) {
       console.error(err);
     }
   };
-}
-  
+
   addItemToCart = newItem => {
     const foundItem = this.items.find(item => newItem.id === item.id);
     if (foundItem) {

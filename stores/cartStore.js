@@ -1,20 +1,33 @@
 import { decorate, observable, computed } from "mobx";
-// import console = require("console");
+import axios from "axios";
+import { instance } from "./instance";
+import { AsyncStorage } from "react-native";
 
 class CartStore {
   items = [];
 
-  addItemToCart = newItem => {
+  addItemToCart = async newItem => {
     const foundItem = this.items.find(item => newItem.id === item.id);
+    console.log("FOUND ITEM", foundItem);
     if (foundItem) {
       foundItem.quantity += newItem.quantity;
       //try catch axios.put
     } else {
+      console.log("NEW ITEM", newItem);
       this.items.push(newItem);
-      //try catch post
+      try {
+        const cartItem = {
+          product: newItem.id,
+          quantity: newItem.quantity
+        };
+        const res = await instance.post("/api/product/add/", cartItem);
+        this.statusMessage = "Success";
+        console.log("RESPONSE", this.statusMessage);
+      } catch (err) {
+        this.statusMessage = err.response;
+        console.log("ERORO", err);
+      }
     }
-
-    console.log("CARTSTORE", this.items);
   };
 
   checkoutCart = () => {

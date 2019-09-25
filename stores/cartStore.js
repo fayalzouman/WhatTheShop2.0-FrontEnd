@@ -6,6 +6,37 @@ import { AsyncStorage } from "react-native";
 class CartStore {
   items = [];
 
+
+  fetchCartItems = async () => {
+
+      const res = await instance.get(
+        //"http://192.168.100.53:8000/api/product/detail/"
+        "http://127.0.0.1:8000/api/cart/"
+      );
+      this.items = res.data;
+
+      let res = await axios.get(
+       //"http://192.168.100.53:8000/api/product/detail/"
+       "http://127.0.0.1:8000/api/cart/"
+      );
+      let corpse = res.data;
+      this.corpse = corpse;
+      this.loading = false;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  addItemToCart = newItem => {
+    const foundItem = this.items.find(item => newItem.id === item.id);
+
+}
+  
+  addItemToCart = newItem => {
+    const foundItem = this.items.find(
+      item => newItem.body === item.name && newItem.option === item.option
+    );
+
   addItemToCart = async newItem => {
     const foundItem = this.items.find(item => newItem.id === item.id);
     console.log("FOUND ITEM", foundItem);

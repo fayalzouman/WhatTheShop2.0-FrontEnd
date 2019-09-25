@@ -4,7 +4,15 @@ import { AsyncStorage } from "react-native";
 import jwt_decode from "jwt-decode";
 import CorpseList from "../components/CorpseList";
 import Profile from "../components/Profile";
+
+
+const instance = axios.create({
+  //"http://192.168.100.226:8000"
+  baseURL: "http://127.0.0.1:8000/"
+});
+
 import { instance } from "./instance";
+
 
 class AuthStore {
   user = null;
@@ -39,8 +47,10 @@ class AuthStore {
     try {
       await instance.post("/api/register/", userData);
       this.login(userData, navigation);
+      //navigation.replace("Profile");
     } catch (err) {
-      alert(err);
+      console.error(err);
+      //alert(err);
     }
   };
 

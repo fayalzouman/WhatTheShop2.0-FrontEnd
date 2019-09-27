@@ -8,17 +8,15 @@ class CartStore {
 
   fetchCartItems = async () => {
     const res = await instance.get(
-      //"http://192.168.100.53:8000/api/product/detail/"
-      "http://127.0.0.1:8000/api/cart/"
+      "api/product/detail/"
+      //"http://127.0.0.1:8000/api/cart/"
     );
+
     this.items = res.data;
 
-    // let x = await axios.get(
-
     // let res = await axios.get(
-
-    //  //"http://192.168.100.53:8000/api/product/detail/"
-    //  "http://127.0.0.1:8000/api/cart/"
+    //   //"http://192.168.100.53:8000/api/product/detail/"
+    //   "http://127.0.0.1:8000/api/cart/"
     // );
     let corpse = res.data;
     this.corpse = corpse;
@@ -27,23 +25,21 @@ class CartStore {
   catch(err) {
     console.error(err);
   }
-
-  // addItemToCart = newItem => {
-  //   const foundItem = this.items.find(item => newItem.id === item.id);
-  // };
-
-
-  // addItemToCart = newItem => {
-  //   const foundItem = this.items.find(
-  //     item => newItem.body === item.name && newItem.option === item.option
-  //   );
-  // };
-
-  addItemToCart = newItem => {
-    const foundItem = this.items.find(
-      item => newItem.body === item.name && newItem.option === item.option
-    );
-  };
+getorderHistory = async orderHistory =>{
+  const previousOrders = this.items.get(item => orderHistory.cart_in_use === items.cart_in_use)
+  console.log("Order History Fetched", previousOrders);
+  if (this.items.cart_in_use == False ){
+  return this.items.cart_in_use
+  }try{
+    const res = instance.get("api/profile/")
+    this.statusMessage = "Success";
+    console.log("RESPONSE", this.statusMessage);
+  } catch (err) {
+    this.statusMessage = err.response;
+    console.log("ERROR", err);
+  }
+}
+};
 
   addItemToCart = async newItem => {
     const foundItem = this.items.find(item => newItem.id === item.id);
@@ -69,22 +65,11 @@ class CartStore {
     }
   };
 
-  // checkoutCart = () => {
-  //   //try catch axios checkout request maybe get
-  //   this.items = [];
-  //   try {
-  //     alert("Enjoy your corpse!");
-  //   } catch (err) {
-  //     this.statusMessage = err.response;
-  //     console.log("ERROR", err);
-  //   }
-  // };
-
   checkoutCart = navigation => {
     this.items = [];
     navigation.replace("CorpseList");
     try {
-      const res = axios.get("http://127.0.0.1:8000/api/cart/");
+      const res = axios.get("api/cart/");
     } catch (err) {
       console.error(err);
     }
@@ -104,6 +89,21 @@ class CartStore {
     } catch (err) {
       this.statusMessage = err.response;
       console.log("ERORO", err);
+    }
+  };
+
+  updateQuantity = async updatedItem => {
+    const foundItem = this.items.find(item => item.id === updatedItem.id);
+    if (foundItem && foundItem.quantity > 0) {
+      foundItem.quantity = updatedItem.quantity;
+      try {
+        const res = await instance.post(
+          `product/modify/${updatedItem.id}/`,
+          foundItem
+        );
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 

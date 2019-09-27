@@ -1,13 +1,20 @@
-import React from "react";
+  
+import React, { Component } from "react";
+import LogoutButton from "../Buttons/LogoutButton";
 import { observer } from "mobx-react";
 
 // NativeBase Components
-import { Card, CardItem, Text, Button, Content } from "native-base";
+import { Card, CardItem, Text, Button, Spinner, List, ListItem, Content } from "native-base";
+//Stores
 import LogoutButton from "../Buttons/LogoutButton";
 import authStore from "../../stores/authStore";
+import corpseStore from "../../stores/corpseStore";
 
 const Profile = ({ navigation }) => {
-  if (!authStore.user) navigation.replace("Login");
+  if (authStore.user) {
+    corpseStore.OrderHistory();
+  }else{
+    navigation.replace("Login");
   return (
     <Content>
       <Card>
@@ -19,3 +26,8 @@ const Profile = ({ navigation }) => {
   );
 };
 export default observer(Profile);
+
+  
+
+
+

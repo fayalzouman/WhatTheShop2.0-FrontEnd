@@ -17,12 +17,34 @@ class CartStore {
     } catch (err) {
       console.error(err);
     }
-  };
 
-  addItemToCart = newItem => {
-    const foundItem = this.items.find(
-      item => newItem.body === item.name && newItem.option === item.option
+    // let res = await axios.get(
+    //   //"http://192.168.100.53:8000/api/product/detail/"
+    //   "http://127.0.0.1:8000/api/cart/"
+    // );
+    let corpse = res.data;
+    this.corpse = corpse;
+    this.loading = false;
+  };
+  catch(err) {
+    console.error(err);
+  }
+  getorderHistory = async orderHistory => {
+    const previousOrders = this.items.get(
+      item => orderHistory.cart_in_use === items.cart_in_use
     );
+    console.log("Order History Fetched", previousOrders);
+    if (this.items.cart_in_use == False) {
+      return this.items.cart_in_use;
+    }
+    try {
+      const res = instance.get("api/profile/");
+      this.statusMessage = "Success";
+      console.log("RESPONSE", this.statusMessage);
+    } catch (err) {
+      this.statusMessage = err.response;
+      console.log("ERROR", err);
+    }
   };
 
   addItemToCart = async newItem => {
@@ -39,7 +61,7 @@ class CartStore {
           product: newItem.id,
           quantity: newItem.quantity
         };
-        const res = await instance.post("/api/product/add/", cartItem);
+        const res = await instance.post("api/product/add/", cartItem);
         this.statusMessage = "Success";
         console.log("RESPONSE", this.statusMessage);
       } catch (err) {
@@ -53,7 +75,7 @@ class CartStore {
     this.items = [];
     navigation.replace("CorpseList");
     try {
-      const res = axios.get("http://127.0.0.1:8000/api/cart/");
+      const res = axios.get("api/cart/");
     } catch (err) {
       console.error(err);
     }
@@ -73,6 +95,21 @@ class CartStore {
     } catch (err) {
       this.statusMessage = err.response;
       console.log("ERORO", err);
+    }
+  };
+
+  updateQuantity = async updatedItem => {
+    const foundItem = this.items.find(item => item.id === updatedItem.id);
+    if (foundItem && foundItem.quantity > 0) {
+      foundItem.quantity = updatedItem.quantity;
+      try {
+        const res = await instance.post(
+          `product/modify/${updatedItem.id}/`,
+          foundItem
+        );
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 

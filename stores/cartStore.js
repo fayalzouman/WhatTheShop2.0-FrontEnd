@@ -34,7 +34,7 @@ class CartStore {
       return this.items.cart_in_use;
     }
     try {
-      const res = instance.get("api/profile/");
+      const res = instance.get("api/user/history/");
       this.statusMessage = "Success";
       console.log("RESPONSE", this.statusMessage);
     } catch (err) {

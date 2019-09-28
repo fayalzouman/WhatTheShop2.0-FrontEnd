@@ -25,21 +25,23 @@ class CartStore {
   catch(err) {
     console.error(err);
   }
-getorderHistory = async orderHistory =>{
-  const previousOrders = this.items.get(item => orderHistory.cart_in_use === items.cart_in_use)
-  console.log("Order History Fetched", previousOrders);
-  if (this.items.cart_in_use == False ){
-  return this.items.cart_in_use
-  }try{
-    const res = instance.get("api/profile/")
-    this.statusMessage = "Success";
-    console.log("RESPONSE", this.statusMessage);
-  } catch (err) {
-    this.statusMessage = err.response;
-    console.log("ERROR", err);
-  }
-}
-};
+  getorderHistory = async orderHistory => {
+    const previousOrders = this.items.get(
+      item => orderHistory.cart_in_use === items.cart_in_use
+    );
+    console.log("Order History Fetched", previousOrders);
+    if (this.items.cart_in_use == False) {
+      return this.items.cart_in_use;
+    }
+    try {
+      const res = instance.get("api/profile/");
+      this.statusMessage = "Success";
+      console.log("RESPONSE", this.statusMessage);
+    } catch (err) {
+      this.statusMessage = err.response;
+      console.log("ERROR", err);
+    }
+  };
 
   addItemToCart = async newItem => {
     const foundItem = this.items.find(item => newItem.id === item.id);
@@ -55,7 +57,7 @@ getorderHistory = async orderHistory =>{
           product: newItem.id,
           quantity: newItem.quantity
         };
-        const res = await instance.post("/api/product/add/", cartItem);
+        const res = await instance.post("api/product/add/", cartItem);
         this.statusMessage = "Success";
         console.log("RESPONSE", this.statusMessage);
       } catch (err) {

@@ -5,9 +5,16 @@ import { observer } from "mobx-react";
 import { Card, CardItem, Text, Button, Content } from "native-base";
 import LogoutButton from "../Buttons/LogoutButton";
 import authStore from "../../stores/authStore";
+import corpseStore from "../../stores/corpseStore";
+import NotLoggedIN from "../NotLoggedIN";
 
 const Profile = ({ navigation }) => {
-  if (!authStore.user) navigation.replace("Login");
+  // if (authStore.user) {
+  //   corpseStore.orderHistory();
+  // } else {
+  //   navigation.replace("Login");
+  // }
+  if (!authStore.user) navigation.replace(<NotLoggedIN />);
   return (
     <Content>
       <Card>

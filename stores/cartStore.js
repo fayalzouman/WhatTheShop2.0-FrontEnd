@@ -7,37 +7,17 @@ class CartStore {
   items = [];
 
   fetchCartItems = async () => {
-    const res = await instance.get(
-      //"http://192.168.100.53:8000/api/product/detail/"
-      "http://127.0.0.1:8000/api/cart/"
-    );
-    this.items = res.data;
-
-    // let x = await axios.get(
-
-    // let res = await axios.get(
-
-    //  //"http://192.168.100.53:8000/api/product/detail/"
-    //  "http://127.0.0.1:8000/api/cart/"
-    // );
-    let corpse = res.data;
-    this.corpse = corpse;
-    this.loading = false;
+    try {
+      const res = await instance.get(
+        //"api/product/detail/"
+        "api/cart/"
+      );
+      this.items = res.data;
+      this.loading = false;
+    } catch (err) {
+      console.error(err);
+    }
   };
-  catch(err) {
-    console.error(err);
-  }
-
-  // addItemToCart = newItem => {
-  //   const foundItem = this.items.find(item => newItem.id === item.id);
-  // };
-
-
-  // addItemToCart = newItem => {
-  //   const foundItem = this.items.find(
-  //     item => newItem.body === item.name && newItem.option === item.option
-  //   );
-  // };
 
   addItemToCart = newItem => {
     const foundItem = this.items.find(
@@ -68,17 +48,6 @@ class CartStore {
       }
     }
   };
-
-  // checkoutCart = () => {
-  //   //try catch axios checkout request maybe get
-  //   this.items = [];
-  //   try {
-  //     alert("Enjoy your corpse!");
-  //   } catch (err) {
-  //     this.statusMessage = err.response;
-  //     console.log("ERROR", err);
-  //   }
-  // };
 
   checkoutCart = navigation => {
     this.items = [];

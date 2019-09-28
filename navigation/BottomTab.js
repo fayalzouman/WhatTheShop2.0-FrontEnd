@@ -11,7 +11,6 @@ import CorpeStack from "../navigation//CorpseStack";
 const BottomTab = createBottomTabNavigator(
   {
     ProfileTab: ProfileStack,
-
     CorpseTab: CorpeStack
   },
   {

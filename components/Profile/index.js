@@ -6,53 +6,61 @@ import { observer } from "mobx-react";
 import {
   Card,
   CardItem,
+  Header,
   Text,
   Button,
-  Spinner,
-  List,
+  Right,
+  Container,
   ListItem,
-  Content
+  Content,
+  Drawer
 } from "native-base";
-//Stores
 
+//Stores
 import authStore from "../../stores/authStore";
 import corpseStore from "../../stores/corpseStore";
-<<<<<<< HEAD
 import NotLoggedIN from "../NotLoggedIN";
+import cartStore from "../../stores/cartStore";
 
-const Profile = ({ navigation }) => {
-  // if (authStore.user) {
-  //   corpseStore.orderHistory();
-  // } else {
-  //   navigation.replace("Login");
-  // }
-  if (!authStore.user) navigation.replace(<NotLoggedIN />);
-  return (
-    <Content>
-      <Card>
-        <CardItem>
-          <LogoutButton />
-        </CardItem>
-      </Card>
-    </Content>
-  );
-=======
-
-const Profile = ({ navigation }) => {
-  if (authStore.user) {
-    corpseStore.OrderHistory();
-  } else {
-    navigation.replace("Login");
+class Profile extends Component {
+  async componentDidMount() {
+    const { navigation } = this.props;
+    const { corpses } = corpseStore;
+    console.log("[profile.index.js user", authStore.user);
+    if (!authStore.user) {
+      console.log("[profile.index.js !authStore.user", authStore.user);
+      navigation.replace("Login");
+    } else {
+      cartStore.getorderHistory();
+    }
+  }
+  render() {
+    let orders = cartStore.previousOrders.map(order => (
+      <Text style={{ color: "black" }}>{order.user}</Text>
+    ));
+    console.log("profile index", cartStore.previousOrders);
     return (
-      <Content>
-        <Card>
-          <CardItem>
+      <Container
+        style={{
+          paddingTop: 20
+        }}
+      >
+        <Header>
+          <Right>
             <LogoutButton />
-          </CardItem>
-        </Card>
-      </Content>
+          </Right>
+        </Header>
+        <Content>
+          <Card>
+            <CardItem>{orders}</CardItem>
+          </Card>
+        </Content>
+      </Container>
     );
   }
->>>>>>> 2ee5c1d9d58d15e36ba0d12dde6373b728b0f1aa
+}
+Profile.navigationOptions = {
+  header: null
 };
+
 export default observer(Profile);

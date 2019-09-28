@@ -12,7 +12,14 @@ const Home = ({ navigation }) => {
       style={styles.container}
     >
       <View style={styles.overlayContainer}>
-        <View style={styles.topStyling}>
+        <View
+          style={styles.topStyling}
+          style={{
+            paddingTop: 100,
+            paddingLeft: 20,
+            paddingRight: 20
+          }}
+        >
           <Text style={styles.homeTitle}>HUMANS R US</Text>
           <Button
             transparent
@@ -22,15 +29,26 @@ const Home = ({ navigation }) => {
           >
             {/* <Text style={styles.buttonTextStyling}>FLAVORS LIST</Text> */}
           </Button>
-          <Button block primary onPress={() => navigation.navigate("Login")}>
+          <Button
+            block
+            transparent
+            onPress={() => navigation.navigate("Login")}
+          >
             <Text style={{ color: "white" }}>Login</Text>
           </Button>
-          <Button block primary onPress={() => navigation.navigate("Register")}>
+          <Button
+            block
+            transparent
+            onPress={() => navigation.navigate("Register")}
+          >
             <Text style={{ color: "white" }}>Register</Text>
           </Button>
         </View>
       </View>
     </ImageBackground>
   );
+};
+Home.navigationOptions = {
+  header: null
 };
 export default Home;

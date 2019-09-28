@@ -5,6 +5,7 @@ import { AsyncStorage } from "react-native";
 
 class CartStore {
   items = [];
+  previousOrders = [];
 
   fetchCartItems = async () => {
     try {
@@ -29,16 +30,20 @@ class CartStore {
   catch(err) {
     console.error(err);
   }
-  getorderHistory = async orderHistory => {
-    const previousOrders = this.items.get(
-      item => orderHistory.cart_in_use === items.cart_in_use
-    );
-    console.log("Order History Fetched", previousOrders);
-    if (this.items.cart_in_use == False) {
-      return this.items.cart_in_use;
-    }
+  getorderHistory = async () => {
+    //filter this.items based on item.cart_in_use
+    // const previousOrders = this.items.filter(
+    //   item => orderHistory.cart_in_use === item.cart_in_use
+    // );
+    // console.log("Order History Fetched", previousOrders);
+    // if (this.item.cart_in_use == False) {
+    //   return this.items.cart_in_use;
+    // }
     try {
-      const res = instance.get("api/profile/");
+      const res = await instance.get("api/user/history/");
+      console.log("[cartstore]", res.data);
+      let history = res.data.filter(order => order.cart_in_use === false);
+      this.previousOrders = history;
       this.statusMessage = "Success";
       console.log("RESPONSE", this.statusMessage);
     } catch (err) {
@@ -122,7 +127,8 @@ class CartStore {
 
 decorate(CartStore, {
   items: observable,
-  quantity: computed
+  quantity: computed,
+  previousOrders: observable
 });
 
 export default new CartStore();

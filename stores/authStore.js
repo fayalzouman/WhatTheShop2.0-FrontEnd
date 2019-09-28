@@ -23,7 +23,7 @@ class AuthStore {
       this.user = null;
     }
   };
-
+  getProfile = async profile => {};
   login = async (userData, navigation) => {
     try {
       const res = await instance.post("api/login/", userData);

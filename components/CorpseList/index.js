@@ -23,7 +23,14 @@ import authStore from "../../stores/authStore";
 import NotLoggedIN from "../NotLoggedIN";
 
 const CorpseList = ({ navigation }) => {
-  if (!authStore.user) {
+  if (authStore.user) {
+    corpseStore.fetchAllcorpses();
+    navigationOptions = {
+      title: "Corpse List",
+      headerLeft: null,
+      headerRight: <CartButton />
+    };
+  } else {
     navigationOptions = {
       title: "Not logged in",
       headerLeft: null,
@@ -32,51 +39,48 @@ const CorpseList = ({ navigation }) => {
     return <NotLoggedIN />;
   }
 
-  // if (authStore.user) {
-  //   corpseStore.fetchAllcorpses();
-  //   navigationOptions = {
-  //     title: "Corpse List",
-  //     headerLeft: null,
-  //     headerRight: <CartButton />
-  //   };
-  // } else {
+  // if (!authStore.user) {
   //   navigationOptions = {
   //     title: "Not logged in",
   //     headerLeft: null,
-  //     headerRight: null
-  //   };
-  //   return <NotLoggedIN />;
+  //     headerRight: null}
+  //     return <NotLoggedIN />;
+  // } else {
+  //   corpseStore.fetchAllcorpses();
+  //   }
   // }
 
   const { corpses } = corpseStore;
   let shops;
-  if (corpses) {
+  if (corpses.length) {
     shops = corpses.map(corpse => (
       <CorpseItem corpse={corpse} key={corpse.id} navigation={navigation} />
     ));
+
+    return (
+      <Content
+        searchBar
+        rounded
+        style={{
+          paddingLeft: 20,
+          paddingRight: 20
+        }}
+      >
+        {/* <Header searchBar rounded> */}
+        <Item>
+          <Icon name="ios-search" />
+          <Input placeholder="Search" />
+          <Icon name="ios-people" />
+        </Item>
+        <Button transparent>
+          <Text>Search</Text>
+        </Button>
+        {/* </Header> */}
+        <List>{shops}</List>
+      </Content>
+    );
   }
-  return (
-    <Content
-      searchBar
-      rounded
-      style={{
-        paddingLeft: 20,
-        paddingRight: 20
-      }}
-    >
-      {/* <Header searchBar rounded> */}
-      <Item>
-        <Icon name="ios-search" />
-        <Input placeholder="Search" />
-        <Icon name="ios-people" />
-      </Item>
-      <Button transparent>
-        <Text>Search</Text>
-      </Button>
-      {/* </Header> */}
-      <List>{shops}</List>
-    </Content>
-  );
+  return <Text>We've run out of stock. Abdulghfoor, you're next!</Text>;
 };
 
 export default observer(CorpseList);

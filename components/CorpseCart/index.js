@@ -46,7 +46,6 @@ class CorpseCart extends Component {
   }
   render() {
     return (
-      //if (this.state.loading) {
       <List>
         {this.state.cartItems}
         <Button

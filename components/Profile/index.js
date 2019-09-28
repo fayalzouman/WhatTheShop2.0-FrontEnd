@@ -6,32 +6,61 @@ import { observer } from "mobx-react";
 import {
   Card,
   CardItem,
+  Header,
   Text,
   Button,
-  Spinner,
-  List,
+  Right,
+  Container,
   ListItem,
-  Content
+  Content,
+  Drawer
 } from "native-base";
-//Stores
 
+//Stores
 import authStore from "../../stores/authStore";
 import corpseStore from "../../stores/corpseStore";
+import NotLoggedIN from "../NotLoggedIN";
+import cartStore from "../../stores/cartStore";
 
-const Profile = ({ navigation }) => {
-  if (authStore.user) {
-    corpseStore.OrderHistory();
-  } else {
-    navigation.replace("Login");
+class Profile extends Component {
+  async componentDidMount() {
+    const { navigation } = this.props;
+    const { corpses } = corpseStore;
+    console.log("[profile.index.js user", authStore.user);
+    if (!authStore.user) {
+      console.log("[profile.index.js !authStore.user", authStore.user);
+      navigation.replace("Login");
+    } else {
+      cartStore.getorderHistory();
+    }
+  }
+  render() {
+    let orders = cartStore.previousOrders.map(order => (
+      <Text style={{ color: "black" }}>{order.user}</Text>
+    ));
+    console.log("profile index", cartStore.previousOrders);
     return (
-      <Content>
-        <Card>
-          <CardItem>
+      <Container
+        style={{
+          paddingTop: 20
+        }}
+      >
+        <Header>
+          <Right>
             <LogoutButton />
-          </CardItem>
-        </Card>
-      </Content>
+          </Right>
+        </Header>
+        <Content>
+          <Card>
+            <CardItem>{orders}</CardItem>
+          </Card>
+        </Content>
+      </Container>
     );
   }
+}
+Profile.navigationOptions = {
+  header: null
 };
+
 export default observer(Profile);
